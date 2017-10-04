@@ -1,24 +1,17 @@
-# README
+# Number Converter 4000
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Enter your number:
+[            ]
 
-Things you may want to cover:
+Convert to base:
+[            ]
 
-* Ruby version
+[ Convert ]
 
-* System dependencies
+5609 inbase 16 is 163a
 
-* Configuration
 
-* Database creation
+## Controllers
+- index
+- NumberConverterConttoller
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

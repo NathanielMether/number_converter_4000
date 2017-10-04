@@ -1,0 +1,28 @@
+<h1>Number Converter 4000</h1>
+
+<% if @number.present? %>
+  <% if @number.to_i > 1 %>
+    <p>Number in base <%= @base %>: <%= base_converter(@number, @current_base, @base) %></p>
+  <% else %>
+    <p>Choose a base greater than 1</p>
+  <% end %>
+<% end %>
+
+<%= form_with(local: true) do |f| %>
+  <div>
+    <%= f.label :number, 'Enter your number: ' %>
+    <%= f.text_field :number, value: @number%>
+  </div>
+
+  <div>
+    <%= f.label :current_base, 'Current base:' %>
+    <%= f.text_field :current_base, value: @current_base%>
+  </div>
+
+  <div>
+    <%= f.label :base, 'Convert to base:' %>
+    <%= f.text_field :base, value: @base%>
+  </div>
+
+  <%= f.button 'Convert'%>
+<% end %>
