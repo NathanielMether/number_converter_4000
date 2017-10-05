@@ -1,4 +1,8 @@
-module NumberConverterHelper
+class NumberConversion < ApplicationRecord
+  def result
+    base_converter(self.number, self.from_base, self.to_base)
+  end
+
   def base_converter(num_string, current_base, end_base)
     num_string = num_string.to_s
     num_array = num_string.scan /\w/
