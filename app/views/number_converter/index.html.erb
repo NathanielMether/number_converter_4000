@@ -1,28 +1,43 @@
 <h1>Number Converter 4000</h1>
 
-<% if @number.present? %>
-  <% if @number.to_i > 1 %>
-    <p>Number in base <%= @base %>: <%= base_converter(@number, @current_base, @base) %></p>
-  <% else %>
-    <p>Choose a base greater than 1</p>
+<p>
+   <%= pluralize(@past_conversions.count, 'conversions')  %>
+</p>
+
+<% if @number_conversion.errors.any? %>
+  <% @number_conversion.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
   <% end %>
+<% elsif @number_conversion.valid? %>
+    <p>Number in base <%= @number_conversion.to_base %>: <%= base_converter(@number_conversion.number, @number_conversion.from_base, @number_conversion.to_base) %></p>
 <% end %>
 
 <%= form_with(local: true) do |f| %>
   <div>
     <%= f.label :number, 'Enter your number: ' %>
-    <%= f.text_field :number, value: @number%>
+    <%= f.text_field :number, value: @number_conversion.number%>
   </div>
 
   <div>
-    <%= f.label :current_base, 'Current base:' %>
-    <%= f.text_field :current_base, value: @current_base%>
+    <%= f.label :from_base, 'Current base:' %>
+    <%= f.text_field :from_base, value: @number_conversion.from_base%>
   </div>
 
   <div>
-    <%= f.label :base, 'Convert to base:' %>
-    <%= f.text_field :base, value: @base%>
+    <%= f.label :to_base, 'Convert to base:' %>
+    <%= f.text_field :to_base, value: @number_conversion.to_base%>
   </div>
 
-  <%= f.button 'Convert'%>
+  <%= f.button 'Convert', class: 'btn btn-primary'%>
+<% end %>
+
+<h2>History</h1>
+<% @past_conversions.each do |conversion| %>
+  <div class="card">
+    <div class="card-body">
+      <%= conversion.number %><sub><%= conversion.from_base%></sub>
+      =
+      <%= conversion.result%><sub><%= conversion.to_base %></sub>
+    </div>
+  </div>
 <% end %>

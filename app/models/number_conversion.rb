@@ -1,6 +1,6 @@
 class NumberConversion < ApplicationRecord
   validates :number, numericality: { greater_than_or_equal_to: 0 }
-  validates :from_base, :to_base, numericality: { greater_than_or_equal_to: 2 }
+  validates :from_base, :to_base, numericality: { greater_than_or_equal_to: 2, less_than_or_equal_to: 16}
 
   def result
     base_converter(self.number, self.from_base, self.to_base)
